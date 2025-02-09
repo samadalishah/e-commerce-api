@@ -6,9 +6,11 @@ services:
       context: .
       dockerfile: ./docker/Dockerfile
       target: base
+    depends_on:
+      - database
     volumes:
       - ./src:/home/node/app/src
-    container_name: ts-node-docker
+    container_name: ecommerce-service
     ports:
       - "3000:3000"
     command: ["sh", "-c", "npm run migration:run && npm run start:dev"]

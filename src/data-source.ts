@@ -26,7 +26,7 @@ const AppDataSource = new DataSource({
     synchronize: false,
     logging: configs.db.logging,
     entities: [User],
-    migrations: [ "./database/migrations/**/*.ts" ],
+    migrations: [__dirname + "/database/migrations/*{.ts,.js}"],
 })
 
 export default AppDataSource

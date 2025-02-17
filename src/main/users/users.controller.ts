@@ -30,8 +30,6 @@ export class UsersController {
 
   @Get()
   async getUser(@Query('username') username: string): Promise<User> {
-    console.log('Received username:', username); // Debug log
-
     return this.usersService.get(username)
   }
 

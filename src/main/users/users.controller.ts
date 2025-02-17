@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, UsePipes, ValidationPipe } from '@nestjs/common'
+import { Controller, Get, Post, Body } from '@nestjs/common'
 import { IsString, IsEmail, MinLength } from 'class-validator';
 import { UsersService } from './users.service'
 import User from '../domain/user/user.entity'
@@ -29,14 +29,12 @@ export class UsersController {
   }
 
   @Post()
-  @UsePipes(new ValidationPipe({ whitelist: true }))
   async createUser(@Validate(UserRequest) @Body() userData: Partial<UserRequest>): Promise<number> {
     const user = this.convert(userData as UserRequest)
     return this.usersService.create(user)
   }
 
   @Post('/update')
-  @UsePipes(new ValidationPipe({ whitelist: true }))
   async updateUser(@Validate(UserRequest) @Body() userData: Partial<UserRequest>): Promise<User> {
     const user = this.convert(userData as UserRequest)
     return this.usersService.update(user)

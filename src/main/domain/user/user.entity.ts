@@ -3,19 +3,19 @@ import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm'
 @Entity({ name: "users" })
 export default class User {
   @PrimaryGeneratedColumn()
-  id: number;
+  id: number
 
   @Column()
-  username: string;
+  username: string
 
   @Column()
-  name: string;
+  name: string
 
   @Column()
-  email: string;
+  email: string
 
   @Column()
-  password: string;
+  password: string
 
   public update(user: User): User {
     this.name = user.name

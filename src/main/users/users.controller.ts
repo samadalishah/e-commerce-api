@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body } from '@nestjs/common'
+import { Controller, Param, Query, Get, Post, Delete, Body } from '@nestjs/common'
 import { IsString, IsEmail, MinLength } from 'class-validator';
 import { UsersService } from './users.service'
 import User from '../domain/user/user.entity'
@@ -23,9 +23,14 @@ class UserRequest {
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
-  @Get()
+  @Get('/all')
   async getUsers(): Promise<User[]> {
     return this.usersService.findAll()
+  }
+
+  @Get()
+  async getUser(@Query('username') username: string): Promise<User> {
+    return this.usersService.get(username)
   }
 
   @Post()
@@ -38,6 +43,11 @@ export class UsersController {
   async updateUser(@Validate(UserRequest) @Body() userData: Partial<UserRequest>): Promise<User> {
     const user = this.convert(userData as UserRequest)
     return this.usersService.update(user)
+  }
+
+  @Delete('/:id')
+  async deleteUser(@Param('id') id: string): Promise<void> {
+    return this.usersService.delete(parseInt(id))
   }
 
   private convert(userData: UserRequest): User {

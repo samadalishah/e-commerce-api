@@ -12,6 +12,15 @@ export class UsersService {
     return this.userRepo.find()
   }
 
+  async get(username: string): Promise<User> {
+    const user = await this.userRepo.findOneBy({username: username}) as User
+    if (!user) {
+      throw UserException.userNotFound(username)
+    }
+
+    return user
+  }
+
   async create(u: User): Promise<number> {
     const existingUser = await this.userRepo.findOneBy({username: u.username}) as User
     if (existingUser) {
@@ -31,5 +40,18 @@ export class UsersService {
     user.update(u)
 
     return this.userRepo.save(user)
+  }
+
+  async delete(id: number): Promise<void> {
+    const user = await this.userRepo.findOneBy({id: id})
+    if (!user) {
+      throw UserException.userNotFound(id)
+    }
+
+    this.userRepo.createQueryBuilder()
+      .delete()
+      .from(User)
+      .where("id = :id", { id: id })
+      .execute()
   }
 }

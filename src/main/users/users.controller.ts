@@ -23,13 +23,15 @@ class UserRequest {
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
-  @Get()
+  @Get('/all')
   async getUsers(): Promise<User[]> {
     return this.usersService.findAll()
   }
 
   @Get()
   async getUser(@Query('username') username: string): Promise<User> {
+    console.log('Received username:', username); // Debug log
+
     return this.usersService.get(username)
   }
 

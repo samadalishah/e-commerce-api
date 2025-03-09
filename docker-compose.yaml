@@ -31,8 +31,24 @@ services:
     networks:
       - commerce
 
+  ollama:
+    image: ollama/ollama:latest
+    container_name: ollama
+    restart: unless-stopped
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama-data:/root/.ollama
+    environment:
+      - OLLAMA_METAL=1
+    networks:
+      - commerce
+    command: "serve"
+
 volumes:
   postgres-data:
+    driver: local
+  ollama-data:
     driver: local
 
 networks:

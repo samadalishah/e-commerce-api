@@ -1,6 +1,7 @@
 import { NestFactory } from '@nestjs/core';
 import { Module } from '@nestjs/common';
 import { UsersModule } from './main/users/users.module';
+import { JokesModule } from './main/jokes/jokes.module';
 import AppDataSource from './data-source';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
@@ -8,6 +9,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
   imports: [
     TypeOrmModule.forRoot(AppDataSource.options),
     UsersModule,
+    JokesModule,
   ],
 })
 export class AppModule {}

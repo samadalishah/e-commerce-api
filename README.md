@@ -37,20 +37,20 @@ curl -X POST \
 
 ## Endpoints
 1. Users
-   1. **GET** `/api/users/all` - Returns all app users
-   2. **GET** `/api/users?username=alice` - Returns specific users
-   3. **POST** `/api/users` body `{"username":"bob", "name":"Bob La","email":"bob@gmail.com", "password": "test-password"}` - Adds new user
-   4. **POST** `/api/users/update` body `{"username":"alice1", "name":"alice","email":"alice@gmail.com","password":"this-is-password"}` - Updates user with provided username
-   5. **DELETE** `/api/users/1` - Deletes user with id 1
+   1. **GET** `/users/all` - Returns all app users
+   2. **GET** `/users?username=alice` - Returns specific users
+   3. **POST** `/users` body `{"username":"bob", "name":"Bob La","email":"bob@gmail.com", "password": "test-password"}` - Adds new user
+   4. **POST** `/users/update` body `{"username":"alice1", "name":"alice","email":"alice@gmail.com","password":"this-is-password"}` - Updates user with provided username
+   5. **DELETE** `/users/1` - Deletes user with id 1
 2. Jokes
-   1. **GET** `/api/jokes` - Returns joke using the local LLM (uses LLM mistral default)
+   1. **GET** `/jokes` - Returns joke using the local LLM (uses LLM mistral default)
    
 
 ## Testing
 ### Get User
-Run below curl to get person
+Run below curl to get user
 ```
-curl -i -X GET -H 'Content-Type: application/json' http://localhost:3000/api/person?name=alice
+curl -i -X GET -H 'Content-Type: application/json' http://localhost:3000/users?username=alice
 ```
 ### Insert User
 Run below curl to insert user
@@ -60,11 +60,11 @@ curl -i -X POST -H 'Content-Type: application/json' -d '{"username":"bob", "name
 ### Delete User
 Run below curl to delete user by id
 ```
-curl -i -X DELETE -H 'Content-Type: application/json' http://localhost:3000/api/users/4
+curl -i -X DELETE -H 'Content-Type: application/json' http://localhost:3000/users/4
 ```
 
 ### Get Joke
 Run below curl to get a joke from LLM
 ```
-curl -i -X GET -H 'Content-Type: application/json' http://localhost:3000/api/joke
+curl -i -X GET -H 'Content-Type: application/json' http://localhost:3000/jokes
 ```

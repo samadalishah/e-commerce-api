@@ -50,7 +50,7 @@ curl -X POST \
 ### Get User
 Run below curl to get user
 ```
-curl -i -X GET -H 'Content-Type: application/json' http://localhost:3000/users?username=alice
+curl -i -X GET -H 'Content-Type: application/json' http://localhost:3000/users\?username=alice
 ```
 ### Insert User
 Run below curl to insert user

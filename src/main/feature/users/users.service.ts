@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
 import { Repository } from 'typeorm'
-import User from '../domain/user/user.entity'
-import { UserException } from '../domain/user/user.exception';
+import User from '../../domain/user/user.entity'
+import { UserException } from '../../domain/user/user.exception'
 
 @Injectable()
 export class UsersService {
@@ -15,7 +15,7 @@ export class UsersService {
   async get(username: string): Promise<User> {
     const user = await this.userRepo.findOneBy({username: username}) as User
     if (!user) {
-      throw UserException.userNotFound(username)
+      throw UserException.notFound(username)
     }
 
     return user
@@ -24,7 +24,7 @@ export class UsersService {
   async create(u: User): Promise<number> {
     const existingUser = await this.userRepo.findOneBy({username: u.username}) as User
     if (existingUser) {
-      throw UserException.userAlreadyExists(u.username)
+      throw UserException.alreadyExists(u.username)
     }
 
     const user = this.userRepo.create(u)
@@ -34,7 +34,7 @@ export class UsersService {
   async update(u: User): Promise<User> {
     const user = await this.userRepo.findOneBy({username: u.username}) as User
     if (!user) {
-      throw UserException.userNotFound(u.username)
+      throw UserException.notFound(u.username)
     }
 
     user.update(u)
@@ -45,7 +45,7 @@ export class UsersService {
   async delete(id: number): Promise<void> {
     const user = await this.userRepo.findOneBy({id: id})
     if (!user) {
-      throw UserException.userNotFound(id)
+      throw UserException.notFound(id)
     }
 
     this.userRepo.createQueryBuilder()

@@ -1,8 +1,8 @@
 import { Controller, Param, Query, Get, Post, Delete, Body } from '@nestjs/common'
-import { IsString, IsEmail, MinLength } from 'class-validator';
+import { IsString, IsEmail, MinLength } from 'class-validator'
 import { UsersService } from './users.service'
-import User from '../domain/user/user.entity'
-import Validate from '../support/validate.body'
+import User from '../../domain/user/user.entity'
+import Validate from '../../support/validate.body'
 
 class UserRequest {
   @IsString()
